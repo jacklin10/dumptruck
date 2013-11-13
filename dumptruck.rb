@@ -79,14 +79,14 @@ class DumpTruck
 
   def read_profile_config
     profile_name = decide_profile()
-    @config['db_config']['profiles'].select{ |profile| profile['name'] == profile_name }.first
+    @config['profiles'].select{ |profile| profile['name'] == profile_name }.first
   end
 
   def decide_profile
     # if -p given use that profile
     return @cmd_line_options[:profile] unless @cmd_line_options[:profile].nil?
     # no -p given. look for default profile
-    default_profile = @config['db_config']['profiles'].select{ |profile| profile['default'] == "true" }.first
+    default_profile = @config['profiles'].select{ |profile| profile['default'] == "true" }.first
     if default_profile.nil?
       raise "Must with include a -p PROFILE or set a default profile in the config"
     else

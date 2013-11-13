@@ -4,30 +4,26 @@ output_path:     &OUTPUT_PATH "/Users/*** your_username ***/Desktop/dumptruck-du
 restore_options: &RESTORE_OPTIONS "--clean --verbose --no-acl --no-owner -j 3"
 backup_options:  &BACKUP_OPTIONS "--format c"
 
-# These options can be supplied on the command line, or you can enter them here.
-dumptruck-config:
-  profile: "forecasting"
-db_config:
-  profiles:
-    - name: "ey"
-      default: "true"
-      schema_name: "*** your_schema_name ***"
-      output_path: *OUTPUT_PATH
-      restore:
-        options: *RESTORE_OPTIONS
-        filename: "ey"                          # ey = auto find most recent engineyard dump in output_path
-      backup:
-        options: *BACKUP_OPTIONS
-        filename: "dumptruck"
-    - name: "forecasting"
-      schema_name: "*** your_schema_name ***"
-      output_path: *OUTPUT_PATH
-      restore:
-        options: *RESTORE_OPTIONS
-        filename: "auto"                         # 'auto' auto find most recent dump for this profile.
-      backup:
-        options: *BACKUP_OPTIONS
-        filename: "dumptruck"
-      tables:                                    # Leave blank if you want to do all tables
-        style: "whitelist"                       # valid options: whitelist | blacklist
-        names: "***table 1***, *** table 2 ***"  # comma sep table names
+profiles:
+  - name: "ey"
+    default: "true"
+    schema_name: "*** your_schema_name ***"
+    output_path: *OUTPUT_PATH
+    restore:
+      options: *RESTORE_OPTIONS
+      filename: "ey"                          # ey = auto find most recent engineyard dump in output_path
+    backup:
+      options: *BACKUP_OPTIONS
+      filename: "dumptruck"
+  - name: "forecasting"
+    schema_name: "*** your_schema_name ***"
+    output_path: *OUTPUT_PATH
+    restore:
+      options: *RESTORE_OPTIONS
+      filename: "auto"                         # 'auto' auto find most recent dump for this profile.
+    backup:
+      options: *BACKUP_OPTIONS
+      filename: "dumptruck"
+    tables:                                    # Leave blank if you want to do all tables
+      style: "whitelist"                       # valid options: whitelist | blacklist
+      names: "***table 1***, *** table 2 ***"  # comma sep table names
