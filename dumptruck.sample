@@ -1,7 +1,7 @@
 # defaults:
 # Don't use the ~ in the output path!
 output_path:     &OUTPUT_PATH "/Users/*** your_username ***/Desktop/dumptruck-dumps"
-restore_options: &RESTORE_OPTIONS "--clean --verbose --no-acl --no-owner -j 3"
+restore_options: &RESTORE_OPTIONS "--clean --create --verbose --no-acl --no-owner -j 3"
 backup_options:  &BACKUP_OPTIONS "--format c"
 
 profiles:
