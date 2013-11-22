@@ -129,7 +129,7 @@ class DumpTruck
       matcher = Regexp.new(regex_filename_matcher).match(filename)
       backup_time = matcher[1] rescue nil
       unless backup_time.nil?
-        file_timestamp = DateTime.strptime(backup_time, timestamp_format).strftime("%m-%d-%yT%H-%M")
+        file_timestamp = DateTime.parse(backup_time)
         if latest_match_timestamp.nil? || latest_match_timestamp < file_timestamp
           latest_matched_filename = filename
           latest_match_timestamp = file_timestamp
