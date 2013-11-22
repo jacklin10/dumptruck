@@ -103,8 +103,14 @@ class DumpTruck
       restore_file_name = find_recent_file(regex, '%m-%d-%yT%H-%M')
     elsif @profile_config['restore']['filename'] == 'ey'
       @prompt_first = true
-      schema_sans_environment = @profile_config['schema_name'].gsub(/(\w+)_\w+/, "\\1")
-      regex ="^#{schema_sans_environment}.(\\d+-\\d+-\\d+T\\d+-\\d+-\\d+).dump$"
+      filename_root = case
+        when !@profile_config['restore']['filename_root'].nil?
+          @profile_config['restore']['filename_root']
+        else
+          /(\w*?)(_development|_test)?\z/.match(@profile_config['schema_name'])[1] rescue nil
+        end
+
+      regex ="^#{filename_root}.(\\d+-\\d+-\\d+T\\d+-\\d+-\\d+).dump$"
       restore_file_name = find_recent_file(regex, '%Y-%m-%dT%H-%M-%S')
     else
       restore_file_name = @profile_config['restore']['filename']
