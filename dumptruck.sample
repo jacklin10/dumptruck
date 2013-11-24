@@ -1,7 +1,7 @@
 # defaults:
 # Don't use the ~ in the output path!
 output_path:     &OUTPUT_PATH "/Users/*** your_username ***/Desktop/dumptruck-dumps"
-restore_options: &RESTORE_OPTIONS "--clean --verbose --no-acl --no-owner -j 3"
+restore_options: &RESTORE_OPTIONS "--clean --create --verbose --no-acl --no-owner -j 3"
 backup_options:  &BACKUP_OPTIONS "--format c"
 
 profiles:
@@ -12,6 +12,7 @@ profiles:
     restore:
       options: *RESTORE_OPTIONS
       filename: "ey"                          # ey = auto find most recent engineyard dump in output_path
+      filename_root: "ey_root_name"           # root name of file that ey is going to look for (defaults to schema_name if missing)
     backup:
       options: *BACKUP_OPTIONS
       filename: "dumptruck"
